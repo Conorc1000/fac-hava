@@ -14,7 +14,24 @@ var checkCookie = () => {
   }
 }
 
+var checkUser = () => {
+  var userPhoneNumber = document.getElementById('phoneNumber').value.toString();
+  firebaseRef.on('value', function(snapshot){
+    var databaseSnapshot = snapshot.val();
+    console.log(databaseSnapshot);
+    databaseSnapshot.forEach(function(element, index, array){
+      console.log(databaseSnapshot[index]);
+      // if (databaseSnapshot[index] === userPhoneNumber) {
+      //
+      // } else {
+      //
+      // }
+    })
+  });
+}
+
 var submitUser = () => {
+  console.log('user details submitted');
   firebaseRefPush.set({
     email: document.getElementById('email').value,
     phoneNumber: document.getElementById('phoneNumber').value
@@ -40,7 +57,8 @@ var Login = React.createClass({
 
   componentDidMount: function() {
     document.getElementById('button').addEventListener('click', function(){
-      submitUser();
+      checkUser();
+      // submitUser();
     })
   },
 
@@ -52,6 +70,7 @@ var Login = React.createClass({
               <label for="txtRegEmail">Email address</label>
               <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
 
+
               <label>Phone Number</label>
               <input class="form-control" id="phoneNumber" placeholder="phoneNumber" />
 
@@ -62,9 +81,3 @@ var Login = React.createClass({
 });
 
 export default Login;
-
-
-
-// firebaseRef.child(user).on("value", function(snapshot){
-//   console.log(snapshot.val());
-// });
