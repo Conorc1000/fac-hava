@@ -5,6 +5,15 @@ var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 var firebaseRefPush = firebaseRef.push();
 
 
+var checkCookie = () => {
+  if(document.cookie.match('havaid')) {
+    console.log('COOKIE IS HERE');
+    //route to offers page
+  } else {
+    return;
+  }
+}
+
 var submitUser = () => {
   firebaseRefPush.set({
     email: document.getElementById('email').value,
@@ -19,11 +28,15 @@ var setCookie = () => {
     var allUsersArr = Object.keys(allUsers)
     var userNo = allUsersArr.length - 1;
     var user = allUsersArr[userNo];
-    document.cookie="id=" + user + "; path=/";
+    document.cookie = "havaid=" + user + "; path=/";
   })
 }
 
 var Login = React.createClass({
+
+  componentWillMount: function() {
+    checkCookie();
+  },
 
   componentDidMount: function() {
     document.getElementById('button').addEventListener('click', function(){
