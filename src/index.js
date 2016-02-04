@@ -7,13 +7,13 @@ import { Router, Route, Link } from 'react-router'
 
 
 class App extends Component {
-    render(){
-      return(
-        <div>
-          {this.props.children}
-        </div>
-      )
-    }
+  render(){
+    return(
+      <div>
+        {this.props.children}
+      </div>
+    )
+  }
 }
 
 
@@ -27,6 +27,3 @@ ReactDOM.render((
     </Route>
   </Router>
 ),document.querySelector('.container'))
-
-
-  //ReactDOM.render( < App / > , document.querySelector('.container'))
