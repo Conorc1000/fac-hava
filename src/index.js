@@ -1,15 +1,32 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Login from './components/Login.js';
+import CustomerLogin from './components/CustomerLogin.js';
+import BarLogin from './components/BarLogin.js';
+
+import { Router, Route, Link } from 'react-router'
+
 
 class App extends Component {
-    render() {
-      return (
-        < div >
-          < Login / >
-        < /div>
-      );
+    render(){
+      return(
+        <div>
+          {this.props.children}
+        </div>
+      )
     }
-  }
+}
 
-  ReactDOM.render( < App / > , document.querySelector('.container'))
+
+ReactDOM.render((
+  <Router>
+    <Route path="/" component={App}>
+      <Route path="bar" component={BarLogin}>
+      </Route>
+      <Route path="customer" component={CustomerLogin}>
+      </Route>
+    </Route>
+  </Router>
+),document.querySelector('.container'))
+
+
+  //ReactDOM.render( < App / > , document.querySelector('.container'))

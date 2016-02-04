@@ -44,7 +44,7 @@ var setCookie = () => {
   })
 }
 
-var Login = React.createClass({
+var CustomerLogin = React.createClass({
 
   componentWillMount: function() {
     checkCookie();
@@ -75,4 +75,4 @@ var Login = React.createClass({
   }
 });
 
-export default Login;
+export default CustomerLogin;
