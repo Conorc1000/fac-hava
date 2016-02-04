@@ -7,16 +7,18 @@ var firebaseRefPush = firebaseRef.push();
 
 var checkCookie = () => {
   if(document.cookie.match('havaid')) {
-    console.log('COOKIE IS HERE');
-    //route to offers page
+    window.location = '/#live-offers'
   } else {
     return;
   }
 }
 
-var checkUser = () => {
-  var userPhoneNumber = document.getElementById('phoneNumber').value;
-  console.log(userPhoneNumber, typeof userPhoneNumber);
+var checkInput = () => {
+  var userPhoneNumber = document.getElementById('phoneNumber').value.replace("+44", "0").replace(/\s/g, "");
+  (userPhoneNumber.match(/^\d{11}$/)) ? checkUser(userPhoneNumber) : alert('Please enter a valid phone number');
+}
+
+var checkUser = (userPhoneNumber) => {
   var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber + '\\b');
   firebaseRef.on('value', function(snapshot){
     var databaseSnapshot = JSON.stringify(snapshot.val());
@@ -35,7 +37,7 @@ var submitUser = () => {
 }
 
 var setCookie = () => {
-  firebaseRef.on('value', function(snapshot){
+  firebaseRef.on('child_added', function(snapshot){
     var allUsers = snapshot.val();
     var allUsersArr = Object.keys(allUsers)
     var userNo = allUsersArr.length - 1;
@@ -45,18 +47,14 @@ var setCookie = () => {
 }
 
 var CustomerLogin = React.createClass({
-
   componentWillMount: function() {
     checkCookie();
   },
-
   componentDidMount: function() {
     document.getElementById('button').addEventListener('click', function(){
-      checkUser();
-      // submitUser();
+      checkInput();
     })
   },
-
   render: function() {
     return (
       <div>
@@ -66,8 +64,8 @@ var CustomerLogin = React.createClass({
               <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
 
 
-              <label>Phone Number</label>
-              <input class="form-control" id="phoneNumber" placeholder="phoneNumber" />
+              <label>Mobile Number</label>
+              <input class="form-control" id="phoneNumber" placeholder="07xxxxxxxxx" />
 
           <button id="button">Register</button>
       </div>

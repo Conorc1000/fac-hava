@@ -8,7 +8,7 @@ var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 var checkCookie = () => {
   if(document.cookie.match('havaBarName')) {
     console.log('COOKIE IS HERE');
-    //route to create offers page
+    window.location = '/#create-offers';
   } else {
     return;
   }
@@ -42,6 +42,7 @@ var BarLogin = React.createClass({
           self.setState({
             loggedIn : "true"
           });
+          window.location = '/#create-offers';
           console.log("Authenticated successfully with payload:", authData);
         }
       });
