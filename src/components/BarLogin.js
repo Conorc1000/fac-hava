@@ -5,7 +5,14 @@ import CreateOffers from './CreateOffers.js';
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 
-
+var checkCookie = () => {
+  if(document.cookie.match('havaBarName')) {
+    console.log('COOKIE IS HERE');
+    //route to create offers page
+  } else {
+    return;
+  }
+}
 
 var BarLogin = React.createClass({
 
@@ -15,9 +22,14 @@ var BarLogin = React.createClass({
       };
     },
 
+  componentWillMount: function() {
+    checkCookie();
+  },
+
   componentDidMount: function() {
     var self = this;
     document.getElementById('button').addEventListener('click', function(){
+      var barName = document.getElementById('barName').value;
       firebaseRef.authWithPassword({
         email    : document.getElementById('email').value,
         password : document.getElementById('password').value
@@ -26,6 +38,7 @@ var BarLogin = React.createClass({
           console.log("Login Failed!", error);
           alert('Login failed. Check your username or password.')
         } else {
+          document.cookie = 'havaBarName=' + barName + "; path='/'";
           self.setState({
             loggedIn : "true"
           });
@@ -44,15 +57,14 @@ var BarLogin = React.createClass({
     return (
       <div>
          <h2> Bar Login</h2>
-
               <label for="txtRegEmail">Email address</label>
-              <input value="conorc1000@gmail.com" type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
-
-
+              <input value="conorc1000@gmail.com" type="email" id="email" placeholder="Enter email" name="email" />
+              <label>Bar Name</label>
+              <input value="The Nag's Head" placeholder="Enter Bar Name" id="barName" />
               <label for="txtRegPassword">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="password" />
+              <input type="password" id="password" placeholder="password" />
 
-          <button id="button"><Link to="createOffers">Login</Link></button>
+          <button id="button">Login</button>
 
       </div>
     )
