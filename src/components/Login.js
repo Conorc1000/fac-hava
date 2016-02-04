@@ -15,20 +15,15 @@ var checkCookie = () => {
 }
 
 var checkUser = () => {
-  var userPhoneNumber = document.getElementById('phoneNumber').value.toString();
+  var userPhoneNumber = document.getElementById('phoneNumber').value;
+  console.log(userPhoneNumber, typeof userPhoneNumber);
+  var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber + '\\b');
   firebaseRef.on('value', function(snapshot){
-    var databaseSnapshot = snapshot.val();
-    console.log(databaseSnapshot);
-    databaseSnapshot.forEach(function(element, index, array){
-      console.log(databaseSnapshot[index]);
-      // if (databaseSnapshot[index] === userPhoneNumber) {
-      //
-      // } else {
-      //
-      // }
-    })
+    var databaseSnapshot = JSON.stringify(snapshot.val());
+    databaseSnapshot.match(userPhoneNumberRegex) ? console.log('exists') : submitUser();
   });
 }
+
 
 var submitUser = () => {
   console.log('user details submitted');

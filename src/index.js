@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Login from './components/Login';
+import Login from './components/Login.js';
 
 class App extends Component {
     render() {
