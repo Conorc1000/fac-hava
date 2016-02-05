@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import CustomerLogin from './components/CustomerLogin.js';
-import BarLogin from './components/BarLogin.js';
-import CreateOffers from './components/CreateOffers.js';
-import OffersPage from './components/OffersPage.js'
+import CustomerLogin from '../components/CustomerLogin.js';
+import BarLogin from '../components/BarLogin.js';
+import CreateOffers from '../components/CreateOffers.js';
+import OffersPage from '../components/OffersPage.js'
 
 
 import { Router, Route, Link } from 'react-router'
