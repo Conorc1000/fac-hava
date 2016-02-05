@@ -22,7 +22,7 @@ var checkUser = (userPhoneNumber) => {
   var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber + '\\b');
   firebaseRef.on('value', function(snapshot){
     var databaseSnapshot = JSON.stringify(snapshot.val());
-    databaseSnapshot.match(userPhoneNumberRegex) ? console.log('exists') : submitUser();
+    databaseSnapshot.match(userPhoneNumberRegex) ? window.location = '/#live-offers' : submitUser();
   });
 }
 
