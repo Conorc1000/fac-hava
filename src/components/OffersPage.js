@@ -14,7 +14,7 @@ var RetrieveOffers = React.createClass({
   render: function() {
     return (
       <div>
-        Hello
+        Offers
       </div>
     )
   }
